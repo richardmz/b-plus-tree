@@ -40,22 +40,22 @@ public class RandomDeleteTest
 
         try
         {
-            int number = 1000000;
+            int amount = 1000000;
 
-            List<Integer> pickupInsertionList = new ArrayList<>(number);
+            List<Integer> pickupInsertionList = new ArrayList<>(amount);
 
-            for (int i = 1; i <= number; i ++)
+            for (int i = 1; i <= amount; i ++)
             {
                 pickupInsertionList.add(i);
             }
 
-            List<Integer> randomInsertionList = new ArrayList<>(number);
+            List<Integer> randomInsertionList = new ArrayList<>(amount);
 
             logger.info("Generating random insertion list...");
 
             long generateRandomInsertStart = System.currentTimeMillis();
 
-            while (randomInsertionList.size() < number)
+            while (randomInsertionList.size() < amount)
             {
                 int randomIndex = (int) (pickupInsertionList.size() * Math.random());
                 randomInsertionList.add(pickupInsertionList.remove(randomIndex));
@@ -67,20 +67,20 @@ public class RandomDeleteTest
 
             logger.info(String.format("randomInsertionList.size()： %d", randomInsertionList.size()));
 
-            List<Integer> pickupDeletionList = new ArrayList<>(number);
+            List<Integer> pickupDeletionList = new ArrayList<>(amount);
 
-            for (int i = 1; i <= number; i ++)
+            for (int i = 1; i <= amount; i ++)
             {
                 pickupDeletionList.add(i);
             }
 
-            List<Integer> randomDeletionList = new ArrayList<>(number);
+            List<Integer> randomDeletionList = new ArrayList<>(amount);
 
             long generateRandomDeleteStart = System.currentTimeMillis();
 
             logger.info("Generating random deletion list...");
 
-            while (randomDeletionList.size() < number)
+            while (randomDeletionList.size() < amount)
             {
                 int randomIndex = (int) (pickupDeletionList.size() * Math.random());
                 randomDeletionList.add(pickupDeletionList.remove(randomIndex));
@@ -96,13 +96,13 @@ public class RandomDeleteTest
 
             long insertionStartTime = System.currentTimeMillis();
 
-            for (int i = 0; i < number; i ++)
+            for (int i = 0; i < amount; i ++)
             {
                 int num = randomInsertionList.get(i);
                 long insertOneStarTime = System.currentTimeMillis();
                 insert(num, String.valueOf(num));
                 long insertOneEndTime = System.currentTimeMillis();
-//                if (i % (number / 2 - 2) == 0)
+//                if (i % (amount / 2 - 2) == 0)
 //                {
 //                    logger.info("i: " + i);
 //                    logger.info(String.format("Insert one used time: %d ms", insertOneEndTime - insertOneStarTime));
@@ -117,11 +117,11 @@ public class RandomDeleteTest
 
             long deletionStartTime = System.currentTimeMillis();
 
-            for (int i = 0; i < number; i ++)
+            for (int i = 0; i < amount; i ++)
             {
                 int num = randomDeletionList.get(i);
                 bPlusTree.delete(num);
-                if (i % (number / 2 - 2) == 0)
+                if (i % (amount / 2 - 2) == 0)
                 {
                     bPlusTree.validate();
 //                    logger.info("i: " + i);
